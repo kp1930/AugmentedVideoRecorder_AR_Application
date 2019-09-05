@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
         assert arFragment != null;
         arFragment.setOnTapArPlaneListener(((hitResult, plane, motionEvent) ->
-
                 MaterialFactory.makeOpaqueWithColor(MainActivity.this, new Color(android.graphics.Color.RED))
                         .thenAccept(material -> {
                             ModelRenderable modelRenderable = ShapeFactory.makeSphere(0.3f,
@@ -40,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
                             AnchorNode anchorNode = new AnchorNode(hitResult.createAnchor());
                             anchorNode.setRenderable(modelRenderable);
                             arFragment.getArSceneView().getScene().addChild(anchorNode);
-                        })));
+                        })
+        ));
+
         Button button = findViewById(R.id.button_record);
         button.setOnClickListener(view -> {
-            if (videoRecorder != null) {
+            if (videoRecorder == null) {
                 videoRecorder = new VideoRecorder();
                 videoRecorder.setSceneView(arFragment.getArSceneView());
 
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 videoRecorder.setVideoQuality(CamcorderProfile.QUALITY_HIGH, orientation);
             }
 
-            assert videoRecorder != null;
             boolean isRecording = videoRecorder.onToggleRecord();
 
             if (isRecording)

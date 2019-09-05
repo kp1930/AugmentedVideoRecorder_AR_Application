@@ -85,7 +85,8 @@ public class VideoRecorder {
 
     private void buildFilename() {
         if (videoDirectory == null) {
-            videoDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Sceneform");
+            videoDirectory = new File(Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_PICTURES) + "/Sceneform");
         }
         if (videoBaseName == null || videoBaseName.isEmpty()) {
             videoBaseName = "Sample";
